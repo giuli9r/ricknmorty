@@ -33,7 +33,7 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .filter {
   width: 400px;
   margin: 0 auto;
