@@ -77,7 +77,7 @@ export default {
         background-color: red;
       }
       .default {
-        background-color: white;
+        background-color: rgb(248, 220, 59);
       }
     }
     .origen {
