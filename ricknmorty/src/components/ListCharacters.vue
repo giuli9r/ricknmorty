@@ -1,10 +1,10 @@
 <template>
     <section>
-        <div class="character">
-            <h2>Characters</h2>
-            <div class="character_list" 
+        <h2>Characters</h2>
+        <div class="characters">
+            <div class="character_item" 
             v-for="char in characters" :key="char.id">
-                {{ char.name }}
+            <CardCharacter :character="char"/>
             </div>
         </div>
     </section>
@@ -13,8 +13,10 @@
 <script>
 import { onMounted, computed } from 'vue'
 import { useStore} from 'vuex'
+import CardCharacter from './CardCharacter'
 
 export default {
+  components: { CardCharacter },
     setup(){
         const store = useStore()
         const characters = computed(() => {
@@ -32,6 +34,13 @@ export default {
 }
 </script>
 
-<style scoped>
 
+
+<style lang="scss">
+.characters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3rem;
+  margin: 3rem 0;
+}
 </style>
