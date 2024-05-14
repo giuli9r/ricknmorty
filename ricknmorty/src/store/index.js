@@ -4,7 +4,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     characters: [],
-    charactersFilter: []
+    charactersFilter: [],
+    pagination: []
   },
   getters: {
   },
@@ -15,6 +16,9 @@ export default createStore({
     },
     setCharacterFilter(state, payload){
       state.charactersFilter = payload
+    },
+    setPaging(state, payload){
+      state.pagination = payload
     }
   },
   actions: {
@@ -24,7 +28,8 @@ export default createStore({
         const data = await response.json()
         commit('setCharacter', data.results)
         commit('setCharacterFilter', data.results)
-        // console.log(data)
+        commit('setPaging', data.info)
+        console.log(data)
       } catch (error) {
         console.log(error)
         alert('Error!')
@@ -36,6 +41,12 @@ export default createStore({
       })
       commit('setCharacterFilter', filter)
     },
+    filterByGender({commit, state}, gender){
+      const filterGender = state.characters.filter((character) => {
+        return character.gender.includes(gender)
+      })
+      commit('setCharacterFilter', filterGender)
+    }
   },
   modules: {
   }
