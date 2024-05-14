@@ -2,6 +2,7 @@
   <div class="container">
     <h1>Rick and Morty</h1>
     <FilterByStatus></FilterByStatus>
+    <FilterByGender></FilterByGender>
     <ListCharacters> </ListCharacters>
   </div>
   </template>
@@ -9,12 +10,14 @@
 <script>
 import ListCharacters from './components/ListCharacters.vue'
 import FilterByStatus from './components/FilterByStatus.vue'
+import FilterByGender from './components/FilterByGender.vue'
 
 export default {
   name: 'App',
   components: {
     ListCharacters,
-    FilterByStatus
+    FilterByStatus,
+    FilterByGender
   }
 }
 </script>
