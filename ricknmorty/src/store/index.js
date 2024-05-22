@@ -5,9 +5,18 @@ export default createStore({
     state: {
         characters: [],
         charactersFilter: [],
-        pagination: []
+        paginationInfo: {
+            count: 0,
+            pages: 0,
+            next: null,
+            prev: null,
+          },
+        currentPage: 1,
     },
     getters: {
+        // characters: (state) => state.characters,
+        // paginationInfo: (state) => state.paginationInfo,
+        currentPage: (state) => state.currentPage,
     },
     // modifica los diferentes valores de state{} mediante actions
     mutations: {
@@ -17,22 +26,27 @@ export default createStore({
         setCharacterFilter(state, payload){
             state.charactersFilter = payload
         },
-        setPaging(state, payload){
-            state.pagination = payload
+        setPaginationInfo(state, info){
+            state.paginationInfo = info
+        },
+        setCurrentPage(state, page) {
+            state.currentPage = page;
         }
     },
     actions: {
-        async getCharacters({commit}){ 
+        async getCharacters({commit}, page = 1){ 
             try {
-                const response = await fetch ('https://rickandmortyapi.com/api/character')
+                const response = await fetch (`https://rickandmortyapi.com/api/character?page= ${page}`);
                 const data = await response.json()
                 commit('setCharacter', data.results)
                 commit('setCharacterFilter', data.results)
-                commit('setPaging', data.info)
+                commit('setPaginationInfo', data.info)
+                commit('setCurrentPage', page)
                 console.log(data)
+                console.log(data.info)
             } catch (error) {
                 console.log(error)
-                alert('Error!')
+                alert('Error fetching characters!')
             }
         },
         filterByStatus({commit, state}, status) {
