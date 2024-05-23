@@ -4,7 +4,7 @@
         <FilterByStatus></FilterByStatus>
         <FilterByGender></FilterByGender>
         <FilterByName/>
-        <ListCharacters> </ListCharacters>
+        <ListCharacters></ListCharacters>
     </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
         FilterByStatus,
         FilterByGender,
         FilterByName
-    }
+    },
 }
 </script>
 

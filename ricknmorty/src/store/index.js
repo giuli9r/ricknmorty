@@ -12,11 +12,13 @@ export default createStore({
             prev: null,
           },
         currentPage: 1,
+        foundByName: true
     },
     getters: {
-        // characters: (state) => state.characters,
-        // paginationInfo: (state) => state.paginationInfo,
+        characters: (state) => state.characters,
+        paginationInfo: (state) => state.paginationInfo,
         currentPage: (state) => state.currentPage,
+        foundByName: (state) => state.foundByName,
     },
     // modifica los diferentes valores de state{} mediante actions
     mutations: {
@@ -31,6 +33,9 @@ export default createStore({
         },
         setCurrentPage(state, page) {
             state.currentPage = page;
+        },
+        setFoundByName(state, boolValue) {
+            state.foundByName = boolValue;
         }
     },
     actions: {
@@ -42,8 +47,6 @@ export default createStore({
                 commit('setCharacterFilter', data.results)
                 commit('setPaginationInfo', data.info)
                 commit('setCurrentPage', page)
-                console.log(data)
-                console.log(data.info)
             } catch (error) {
                 console.log(error)
                 alert('Error fetching characters!')
@@ -64,12 +67,28 @@ export default createStore({
         filterByName({commit, state}, name) {
             const formatName = name.toLowerCase();
             const results = state.characters.filter((character) => {
+                // debugger
                 let characterName = character.name.toLowerCase();
                 if (characterName.includes(formatName)){
+                    // debugger
                     return character
                 }
             })
+            if (results.length == 0) {
+                commit('setFoundByName', false)
+            }
             commit('setCharacterFilter', results)
+        },
+        updateFoundByName({commit, state}) {
+            // debugger
+            console.log(state.characters.length)
+            console.log(state.foundByName)
+
+            if (state.characters.length == 0) {
+                commit('setFoundByName', false)
+            } else {
+                commit('setFoundByName', true)
+            }
         }
     },
     modules: {

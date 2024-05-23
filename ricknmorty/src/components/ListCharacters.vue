@@ -8,9 +8,9 @@
             </div>
         </div>
         <div class="pagination">
-            <button class="button-4" @click="goToPage(paginationInfo.prev? 1 : paginationInfo.prev )" :disabled="!paginationInfo.prev">Prev</button>
+            <button class="button-4" @click="goToPage(paginationInfo.prev)" :disabled="!paginationInfo.prev">Ant.</button>
             <span>Page {{ currentPage }} of {{ paginationInfo.count }}</span>
-            <button class="button-4" @click="goToPage(paginationInfo.next)" :disabled="!paginationInfo.next">Next</button>
+            <button class="button-4" @click="goToPage(paginationInfo.next)" :disabled="!paginationInfo.next">Sig.</button>
         </div>
     </section>
 </template>
@@ -34,7 +34,6 @@ export default {
                 const url = new URL(pageUrl);
                 const page = url.searchParams.get('page');
                 store.dispatch('getCharacters', Number(page));
-                console.log()
                 }
             }
         };

@@ -4,25 +4,33 @@
         type="text" 
         placeholder="Search by Name"
         v-model="name"
-        @keyup="filter()">
+        @keyup="filter(), updateFoundByName()">
+        <h2 v-show="!foundByName"> No characters found</h2>
     </div>
     
 </template>
 
 <script>
 import { useStore } from 'vuex';
-import { ref } from 'vue';
+import { ref } from 'vue'
+import { computed } from 'vue'
+
 
 export default {
     setup(){
         const store = useStore();
         const name = ref('');
+        const foundByName = computed(() => store.state.foundByName)
 
         const filter = ()=>{
             store.dispatch('filterByName', name.value)
         }
+        const updateFoundByName = () => {
+            store.dispatch('updateFoundByName')
+        }
+        
         return {
-            name, filter
+            foundByName,name, filter, updateFoundByName
         }
     }
 }
