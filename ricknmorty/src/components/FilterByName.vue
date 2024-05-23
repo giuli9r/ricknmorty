@@ -5,8 +5,7 @@
         placeholder="Search by Name"
         v-model="name"
         @keyup="filter(), updateFoundByName()">
-        <!-- <h2 v-show="!foundByName"> No characters found</h2> -->
-        <h2 v-if="!foundByName">No characters found!😢</h2>
+        <h2 v-show="!foundByName"> No characters found</h2>
     </div>
     
 </template>
